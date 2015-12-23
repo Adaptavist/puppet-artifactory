@@ -1,0 +1,70 @@
+### File managed with puppet ###
+#### Served by:        '<%= scope.lookupvar('::servername') %>'
+#### Module:           '<%= scope.to_hash['module_name'] %>'
+#### Template source:  '<%= template_source %>'
+
+INSTANCE_NAME="<%= @instance_name %>"
+PRODUCT="artifactory"
+
+INSTANCE_GROUP="<%= @hosting_group %>"
+INSTANCE_USER="<%= @hosting_user %>"
+
+<% if @db %>
+# Database config
+ <%- @db.keys.each do |key| -%>
+<%="#{key}=\'#{@db[key]}\'"%>
+ <%-end%>
+<% end %>
+
+<% if @java_flags %>
+#Java flags
+ <%- @java_flags.keys.each do |flag| -%>
+<%="#{flag}=\'#{@java_flags[flag]}\'"%>
+ <%-end%> 
+<%end%>
+
+<% if @custom %>
+#Custom config
+ <%- @custom.keys.each do |flag| -%>
+<%="#{flag}=\'#{@custom[flag]}\'"%>
+ <%-end%> 
+<%end%>
+
+<% if @drivers %>
+#Drivers config
+ <%- index = 0
+if (@drivers["location_path"]) then
+    @drivers["location_path"].each do | driver |
+      if index == 0 then
+        suffix = ""
+      else
+        suffix = "_#{index}"
+      end -%>
+<%= "DRIVER_PATH#{suffix}" %>=<%= "#{driver}" %>
+    <%- index += 1
+    end 
+end 
+if (@drivers["location_url"]) then
+    @drivers["location_url"].each do | driver |
+        tarball_location_splitted = driver.split('/')
+        tarball_file_name = tarball_location_splitted[-1]
+      if index == 0 then
+        suffix = ""
+      else
+        suffix = "_#{index}"
+      end -%>
+<%= "DRIVER_PATH#{suffix}" %>=<%= "#{@work_dir}/#{tarball_file_name}" %>
+    <%- index += 1
+    end 
+end 
+-%>
+DRIVERS_COUNT="<%= index %>"
+<%end%>
+
+CONNECTOR_COUNT=0
+
+#License
+<%if @license %>
+LICENSE="<%=@license%>"
+<%end%>
+
