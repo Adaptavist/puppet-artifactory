@@ -1,15 +1,16 @@
 fixtures:
   repositories:
     oracle_java:
-      repo: 'ssh://git@stash.adaptavist.com:7999/pup/puppet-oracle_java.git'
+      repo: 'https://github.com/Adaptavist/puppet-oracle_java.git'
     limits:
       repo: 'https://github.com/Adaptavist/puppet-limits'
     stdlib:
       repo: 'https://github.com/Adaptavist/puppet-stdlib'
     packages_repos:
-      repo: 'ssh://git@stash.adaptavist.com:7999/pup/puppet-packages_repos.git'
+      repo: 'https://github.com/Adaptavist/puppet-packages_repos.git'
     apt:
       repo: 'https://github.com/Adaptavist/puppet-apt'
+      ref: '1.8.0'
     yum:
       repo: 'https://github.com/Adaptavist/puppet-yum'
     puppi:
