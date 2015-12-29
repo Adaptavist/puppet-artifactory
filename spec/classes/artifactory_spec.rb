@@ -25,6 +25,7 @@ describe 'artifactory', :type => 'class' do
     let(:facts){{
       :osfamily => 'Debian',
       :lsbdistcodename => 'precise',
+      :lsbdistid => 'Ubuntu',
       :host => custom_host,
     }}
     it do
@@ -54,6 +55,7 @@ describe 'artifactory', :type => 'class' do
     let(:facts){{
       :osfamily => 'Debian',
       :lsbdistcodename => 'precise',
+      :lsbdistid => 'Ubuntu',
     }}
     it do
       should contain_oracle_java
@@ -76,6 +78,7 @@ describe 'artifactory', :type => 'class' do
   context "Should create dirs, download tar from url, extract tar and prepare avst-app.conf.sh " do
   let(:facts){{
     :osfamily => 'Debian',
+    :lsbdistid => 'Ubuntu',
     :lsbdistcodename => 'precise',
     :host => host,
   }}
@@ -109,6 +112,7 @@ describe 'artifactory', :type => 'class' do
 
   let(:facts){{
     :osfamily => 'Debian',
+    :lsbdistid => 'Ubuntu',
     :lsbdistcodename => 'precise',
     :host => host,
   }}

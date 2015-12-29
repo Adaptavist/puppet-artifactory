@@ -12,6 +12,7 @@ describe 'artifactory::dependencies', :type => 'class' do
   context "Should include all dependencies based on operating system for generic avstapp app on Debian" do
     let(:facts){{
       :osfamily => 'Debian',
+      :lsbdistid => 'Ubuntu',
       :lsbdistcodename => 'precise',
       :host => host,
     }}
