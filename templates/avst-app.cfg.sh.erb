@@ -23,6 +23,11 @@ INSTANCE_USER="<%= @hosting_user %>"
  <%-end%> 
 <%end%>
 
+# manual manual_service_script script
+<% if @manual_service_script != "false" and @manual_service_script != false %>
+MANUAL_SERVICE=1
+<% end %>
+
 <% if @custom %>
 #Custom config
  <%- @custom.keys.each do |flag| -%>

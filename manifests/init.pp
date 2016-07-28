@@ -34,13 +34,14 @@
 #              JIRA_MAX_PERM_SIZE: '256m'
 
 class artifactory(
-  $instance_name     = 'artifactory',
-  $base_directory    = '/opt',
-  $share_directory   = '/usr/share/avst-app',
-  $hosting_user      = 'artifactory',
-  $hosting_group     = 'artifactory',
-  $work_dir          = '/tmp',
-  $conf = {},
+  $instance_name         = 'artifactory',
+  $base_directory        = '/opt',
+  $share_directory       = '/usr/share/avst-app',
+  $hosting_user          = 'artifactory',
+  $hosting_group         = 'artifactory',
+  $work_dir              = '/tmp',
+  $manual_service_script = false,
+  $conf                  = {},
 ){
 
   class { 'artifactory::dependencies': } ->
@@ -75,7 +76,7 @@ class artifactory(
   }
 
   $instance_dir = "${base_directory}/${instance_name}"
-  
+
   # Create base directory structure
   file { $instance_dir :# , "${instance_dir}/home", "${instance_dir}/install"] :
     ensure => directory,
@@ -137,7 +138,7 @@ class artifactory(
           ensure  => installed,
           require => [ File["${instance_dir}/avst-app.cfg.sh"], Class['oracle_java'] ],
   }
-  
+
   # run avst-app install with tarball passed
   exec {
       'install_artifactory_with_avstapp':
@@ -165,11 +166,13 @@ class artifactory(
           require => Exec['modify_artifactory_with_avstapp'],
   }
   # celebrate
-  service { $instance_name :
-    ensure    => running,
-    enable    => true,
-    subscribe => Exec['modify_artifactory_with_avstapp'],
-    require   => Exec['install_service_artifactory_with_avstapp'],
+  unless ( str2bool($manual_service_script) ) {
+    service { $instance_name :
+      ensure    => running,
+      enable    => true,
+      subscribe => Exec['modify_artifactory_with_avstapp'],
+      require   => Exec['install_service_artifactory_with_avstapp'],
+    }
   }
 }
 
