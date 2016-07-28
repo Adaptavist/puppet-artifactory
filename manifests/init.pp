@@ -34,13 +34,14 @@
 #              JIRA_MAX_PERM_SIZE: '256m'
 
 class artifactory(
-  $instance_name     = 'artifactory',
-  $base_directory    = '/opt',
-  $share_directory   = '/usr/share/avst-app',
-  $hosting_user      = 'artifactory',
-  $hosting_group     = 'artifactory',
-  $work_dir          = '/tmp',
-  $conf = {},
+  $instance_name         = 'artifactory',
+  $base_directory        = '/opt',
+  $share_directory       = '/usr/share/avst-app',
+  $hosting_user          = 'artifactory',
+  $hosting_group         = 'artifactory',
+  $work_dir              = '/tmp',
+  $manual_service_script = false,
+  $conf                  = {},
 ){
 
   class { 'artifactory::dependencies': } ->
