@@ -1,5 +1,5 @@
 name 'artifactory'
-version '0.1.9'
+version '0.1.10'
 source 'git@github.com:Adaptavist/puppet-artifactory.git'
 author 'mbrehovsky'
 summary 'Artifactory Module' 
