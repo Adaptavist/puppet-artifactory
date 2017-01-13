@@ -42,9 +42,14 @@ class artifactory(
   $work_dir              = '/tmp',
   $manual_service_script = false,
   $conf                  = {},
+  $soft_nofile           = '1024',
+  $hard_nofile           = '8192',
 ){
 
-  class { 'artifactory::dependencies': } ->
+  class { 'artifactory::dependencies':
+        soft_nofile => $soft_nofile,
+        hard_nofile => $hard_nofile
+  } ->
   Class['artifactory']
 
   # merge custom configuration with defaults
