@@ -24,7 +24,7 @@ describe 'artifactory::dependencies', :type => 'class' do
     }}
 
     it do
-      should contain_oracle_java
+      should contain_class('oracle_java')
       should contain_limits__fragment('*/soft/nofile').with(
         'value' => soft_nofile
       )
@@ -50,7 +50,7 @@ describe 'artifactory::dependencies', :type => 'class' do
     }}
 
     it do
-      should contain_oracle_java
+      should contain_class('oracle_java')
       should contain_limits__fragment('*/soft/nofile').with(
         'value' => soft_nofile
       )

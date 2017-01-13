@@ -29,7 +29,7 @@ describe 'artifactory', :type => 'class' do
       :host => custom_host,
     }}
     it do
-      should contain_oracle_java
+      should contain_class('oracle_java')
       should contain_file(base_directory).with(
           'ensure'  => 'directory',
           'owner'   => 'root',
@@ -58,7 +58,7 @@ describe 'artifactory', :type => 'class' do
       :lsbdistid => 'Ubuntu',
     }}
     it do
-      should contain_oracle_java
+      should contain_class('oracle_java')
       should contain_file(cust_base_directory).with(
           'ensure'  => 'directory',
           'owner'   => 'root',
@@ -87,7 +87,7 @@ describe 'artifactory', :type => 'class' do
   }}
 
     it do
-    should contain_artifactory
+    should contain_class('artifactory')
     [instance_dir].each do |file_name|
         should contain_file( file_name ).with(
           'ensure' => 'directory',
@@ -123,7 +123,7 @@ describe 'artifactory', :type => 'class' do
   }}
 
     it do
-    should contain_artifactory
+    should contain_class('artifactory')
     [instance_dir].each do |file_name|
         should contain_file( file_name ).with(
           'ensure' => 'directory',
